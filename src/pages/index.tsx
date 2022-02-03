@@ -5,14 +5,17 @@ import type {
 import { getSession } from 'next-auth/react'
 import { Button } from '@chakra-ui/react'
 import { signOut } from 'next-auth/react'
-import { HStack, VStack, Avatar } from '@chakra-ui/react'
+import { HStack, VStack, Avatar, Text } from '@chakra-ui/react'
 import { FiSettings, FiLogOut } from 'react-icons/fi'
+import EmptyListCard from '@/components/EmptyListCard'
+import { useRouter } from 'next/router'
 
 const Home = ({ user }: ServerSideProps) => {
+  const router = useRouter()
   return (
     <VStack>
       <HStack justifyContent={'flex-end'} width={'full'}>
-        <Button color={'blue.600'}>
+        <Button onClick={() => router.push('/settings')}>
           <FiSettings />
         </Button>
         <Button onClick={() => signOut()} color={'red.600'}>
@@ -20,7 +23,8 @@ const Home = ({ user }: ServerSideProps) => {
         </Button>
       </HStack>
       <Avatar size={'xl'} />
-      <p>{user?.name}</p>
+      <Text fontSize={'xl'}>{user?.name}</Text>
+      <EmptyListCard />
     </VStack>
   )
 }
