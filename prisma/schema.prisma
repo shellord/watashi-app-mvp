@@ -39,12 +39,13 @@ model Session {
 model User {
   id            String    @id @default(cuid())
   name          String?
+  username      String    @unique @default(cuid())
   email         String?   @unique
   emailVerified DateTime?
   image         String?
   accounts      Account[]
   sessions      Session[]
-  List          List[]
+  Items         Items[]
 }
 
 model VerificationToken {
@@ -55,17 +56,12 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
-model List {
-  id      String @id @default(cuid())
-  name    String
-  ownerId String
-  owner   User   @relation(fields: [ownerId], references: [id], onDelete: Cascade)
-  items   Item[]
-}
-
-model Item {
-  id     String @id @default(cuid())
-  name   String
-  listId String
-  list   List   @relation(fields: [listId], references: [id], onDelete: Cascade)
+model Items {
+  id          String  @id @default(cuid())
+  name        String
+  poster_path String?
+  media_type  String
+  userId      String
+  itemId      String
+  user        User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

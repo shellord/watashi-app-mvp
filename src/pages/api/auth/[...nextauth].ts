@@ -20,4 +20,11 @@ export default NextAuth({
   pages: {
     signIn: '/auth/signin',
   },
+  callbacks: {
+    async session({ session, user, token }) {
+      session.user.id = user.id
+      session.user.username = user.username as string
+      return session
+    },
+  },
 })
