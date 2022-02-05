@@ -18,7 +18,6 @@ export default async function handler(
       id: item.id,
       name: item.name,
       poster_path: item.poster_path,
-      overview: item.overview,
       title: item.title,
     })
   })
