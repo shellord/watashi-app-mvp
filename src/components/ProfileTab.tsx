@@ -33,7 +33,6 @@ const ProfileTab = () => {
       <Input
         placeholder={username}
         variant={'filled'}
-        w='sm'
         value={value}
         onChange={(e) => setValue(e.target.value)}
       />
